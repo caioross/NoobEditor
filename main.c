@@ -30,9 +30,9 @@ int main(int argc, char **argv){
 	fread(buffer, 1024, 1, f);
 	fclose(f);
 	
-	node *arr[get_lines(buffer)];
-		
+	node *arr[get_lines(buffer)];	
 	node *head = malloc(sizeof(node));
+	arr[0] = head;
 	node *faki = head;
 	node *prev = head;
 
