@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include <ncurses.h>
+
+
+typedef struct Node{
+	int data;
+	struct Node* next;
+	struct Node* prev;
+}node;
+
+int get_lines(char *buffer);
 
 int main(int argc, char **argv){
 	if(argc < 2){
@@ -8,19 +19,41 @@ int main(int argc, char **argv){
 		exit(1);
 	}
 	FILE *f = fopen(argv[1], "r");
+	
+	if(f ==NULL){
+		perror("Arquivo nao exite...");
+		exit(1);
+	}
 
 	char buffer[1024] = {0};
 
 	fread(buffer, 1024, 1, f);
 	fclose(f);
+	
+	node *arr[get_lines(buffer)];
+		
+	node *head = malloc(sizeof(node));
+	node *faki = head;
+	node *prev = head;
+
+
 
 	int current = 0;
 
 	initscr();
 
-	printw("%s", buffer);
-	getch();
 	
 	endwin();
 	return 0;
 }
+
+int get_lines(char *buffer){
+        int x = 0;
+        char *p = strchr(buffer, '\n');
+        while(p != NULL){
+                x++;
+                p = strchr(p+1, '\n');
+        }
+        return x;
+}
+
