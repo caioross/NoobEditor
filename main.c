@@ -30,13 +30,20 @@ int main(int argc, char **argv){
 	fread(buffer, 1024, 1, f);
 	fclose(f);
 	
-	node *arr[get_lines(buffer)];	
+	int lines_buffer = get_lines(buffer);
+
+	node *arr[lines_buffer];
 	node *head = malloc(sizeof(node));
 	arr[0] = head;
 	node *faki = head;
 	node *prev = head;
-
-
+	
+	for(int i = 0; i < lines_buffer; ++i){
+		int j = 0;
+		while(buffer[j] != '\n'){
+			faki->data = buffer[j];
+		}
+	}
 
 	int current = 0;
 
