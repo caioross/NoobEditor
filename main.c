@@ -9,7 +9,7 @@ typedef struct Node{
 	struct Node* prev;
 }node;
 
-static char* read_file_all(const char *path size_t *out_len){
+static char* read_file_all(const char *path, size_t *out_len){
 	FILE *f = fopen(path, "rb")
 	if (!f){
 		perror("Erro ao abrir o arquivo");
@@ -104,6 +104,30 @@ int main(int argc, char **argv){
 	for (size_t i = 0; i < nbytes; ++i){
 		unsigned char c = (unsigned char)buffer[i];
 
-		if (c == '\r')
+		if (c == '\r'){
+			continue;	
+		}
+
+		if (c != '\n'){
+			Node *node =  make_node((int)c);
+			if (!head){
+				head = tail = node;
+			} else {
+				tail->next = node;
+				node->prev = tail;
+				tail = node;
+			}
+		}
+
+		if (c == '\n'){
+			if (line_idx < total_lines){
+				arr[line_idx = head];
+			}
+			line_idx++;
+			head = tail = NULL;
+		}
 	}
+
+/* Continue!!! */
+
 }
