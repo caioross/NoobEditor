@@ -34,9 +34,10 @@ int main(int argc, char **argv){
 
 	node *arr[lines_buffer];
 	for(int i = 0; i < lines_buffer; ++i){
-		int j = 0;
-		while(buffer[j] != '\n'){
-			faki->data = buffer[j];
+		//tentando fazer esse loop que passa os caracteres para a linked list,
+		//onde cada linha do arquivo é uma linked list diferente
+		if(buffer[i] == '\n'){
+
 		}
 	}
 
